@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "lhm",
+    "name": "Left Hambld Mod",
+    "description": "Mod that flips your hands.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/AquUpd",
+    "updateUrl": "",
+    "authorList": [
+      "Aqua_Tic(AqUpd"
+    ],
+    "credits": "nekoli",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
