@@ -25,17 +25,17 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 
-@Mod(modid = LeftHanbldMod.MOD_ID, name = LeftHanbldMod.MOD_NAME, version = LeftHanbldMod.VERSION, clientSideOnly = true)
-public class LeftHanbldMod {
+@Mod(modid = LeftHandedMod.MOD_ID, name = LeftHandedMod.MOD_NAME, version = LeftHandedMod.VERSION, clientSideOnly = true)
+public class LeftHandedMod {
 	public static final String MOD_ID = "lhm";
-	public static final String MOD_NAME = "Hypixel Addons";
-	public static final String VERSION = "0.0.4";
+	public static final String MOD_NAME = "Left Handed Mod";
+	public static final String VERSION = "1.1";
 
 	public static boolean isLeftHand = true;
 
 	private final EventListener eventListener;
 
-	public LeftHanbldMod() {
+	public LeftHandedMod() {
 		Registrations.init();
 		this.eventListener = new EventListener();
 	}
@@ -44,6 +44,7 @@ public class LeftHanbldMod {
 	public void onFMLInitializationEvent(FMLInitializationEvent ev) {
 		MinecraftForge.EVENT_BUS.register(eventListener);
 	}
+
 	public static void changeHands(){
 		isLeftHand = !isLeftHand;
 	}

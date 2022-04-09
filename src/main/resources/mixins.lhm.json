@@ -2,7 +2,9 @@
   "package": "com.aqupd.lhm.mixins",
   "refmap": "mixins.lhm.refmap.json",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [
-    "MixinItemRenderer"
+  "mixins": [],
+  "client": [
+    "MixinItemRenderer",
+    "MixinRenderFish"
   ]
 }
