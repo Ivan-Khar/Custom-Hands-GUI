@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.aqupd.lhm.LeftHandedMod.isLeftHand;
+import static com.aqupd.lhm.LeftHandedMod.*;
 import static org.lwjgl.opengl.GL11.GL_BACK;
 import static org.lwjgl.opengl.GL11.GL_FRONT;
 
@@ -21,6 +21,10 @@ public class MixinItemRenderer {
 
     @Inject(method = "renderItemInFirstPerson(F)V", at = @At(value = "HEAD"))
     public void renderItemInFirstPerson(float partialTicks, CallbackInfo ci) {
+
+        int k = isLeftHand ? -1 : 1;
+        GlStateManager.translate(xGui * k, yGui, zGui);
+
         if(isLeftHand){
             GlStateManager.scale(-1, 1, 1);
             if (this.itemToRender != null) {

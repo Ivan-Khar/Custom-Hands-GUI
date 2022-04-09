@@ -44,8 +44,6 @@ repositories {
 }
 
 dependencies {
-    include 'com.github.TheNullicorn:Nedit:2.1.0'
-
     include("org.spongepowered:mixin:0.7.11-SNAPSHOT") {
         exclude module: "guava"
         exclude module: "commons-io"

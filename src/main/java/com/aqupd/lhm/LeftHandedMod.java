@@ -32,6 +32,9 @@ public class LeftHandedMod {
 	public static final String VERSION = "1.1";
 
 	public static boolean isLeftHand = true;
+	public static double xGui = 0;
+	public static double yGui = 0;
+	public static double zGui = 0;
 
 	private final EventListener eventListener;
 
@@ -47,5 +50,16 @@ public class LeftHandedMod {
 
 	public static void changeHands(){
 		isLeftHand = !isLeftHand;
+	}
+
+	public static void setHandPos(String xyz, Double value){
+		switch(xyz){
+			case "x":
+				xGui = value;
+			case "y":
+				yGui = value;
+			case "z":
+				zGui = value;
+		}
 	}
 }
