@@ -36,7 +36,6 @@ public class LeftHandedMod {
 	public static double yGui = 0;
 	public static double zGui = 0;
 
-	public static float angle = 0.0F;
 	public static float xRot = 0.0F;
 	public static float yRot = 0.0F;
 	public static float zRot = 0.0F;
@@ -61,7 +60,6 @@ public class LeftHandedMod {
 		xGui = 0;
 		yGui = 0;
 		zGui = 0;
-		angle = 0;
 		xRot = 0.0F;
 		yRot = 0.0F;
 		zRot = 0.0F;
@@ -80,11 +78,8 @@ public class LeftHandedMod {
 				break;
 		}
 	}
-	public static void setHandRot(String axyz, Float value){
-		switch(axyz){
-			case "a":
-				angle = value;
-				break;
+	public static void setHandRot(String xyz, Float value){
+		switch(xyz){
 			case "x":
 				xRot = value;
 				break;
