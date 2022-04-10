@@ -21,15 +21,12 @@ public class GuiSliderResponder implements GuiPageButtonList.GuiResponder{
                 LeftHandedMod.setHandPos("z", (double) value);
                 break;
             case 5:
-                LeftHandedMod.setHandRot("a", value);
-                break;
-            case 6:
                 LeftHandedMod.setHandRot("x", value);
                 break;
-            case 7:
+            case 6:
                 LeftHandedMod.setHandRot("y", value);
                 break;
-            case 8:
+            case 7:
                 LeftHandedMod.setHandRot("z", value);
                 break;
         }
