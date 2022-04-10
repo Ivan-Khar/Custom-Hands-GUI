@@ -29,7 +29,7 @@ public class LeftHandedMod {
 
 	public static final String MOD_ID = "lhm";
 	public static final String MOD_NAME = "Left Handed Mod";
-	public static final String VERSION = "1.1";
+	public static final String VERSION = "debug";
 
 	public static boolean isLeftHand = true;
 	public static double xGui = 0;
