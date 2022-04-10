@@ -36,6 +36,11 @@ public class LeftHandedMod {
 	public static double yGui = 0;
 	public static double zGui = 0;
 
+	public static float angle = 0.0F;
+	public static float xRot = 0.0F;
+	public static float yRot = 0.0F;
+	public static float zRot = 0.0F;
+
 	private final EventListener eventListener;
 
 	public LeftHandedMod() {
@@ -52,14 +57,43 @@ public class LeftHandedMod {
 		isLeftHand = !isLeftHand;
 	}
 
+	public static void resetHands(){
+		xGui = 0;
+		yGui = 0;
+		zGui = 0;
+		angle = 0;
+		xRot = 0.0F;
+		yRot = 0.0F;
+		zRot = 0.0F;
+	}
+
 	public static void setHandPos(String xyz, Double value){
 		switch(xyz){
 			case "x":
 				xGui = value;
+				break;
 			case "y":
 				yGui = value;
+				break;
 			case "z":
 				zGui = value;
+				break;
+		}
+	}
+	public static void setHandRot(String axyz, Float value){
+		switch(axyz){
+			case "a":
+				angle = value;
+				break;
+			case "x":
+				xRot = value;
+				break;
+			case "y":
+				yRot = value;
+				break;
+			case "z":
+				zRot = value;
+				break;
 		}
 	}
 }

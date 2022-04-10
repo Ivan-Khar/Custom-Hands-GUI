@@ -24,7 +24,7 @@ public class MixinItemRenderer {
 
         int k = isLeftHand ? -1 : 1;
         GlStateManager.translate(xGui * k, yGui, zGui);
-
+        GlStateManager.rotate(angle, xRot * k, yRot, zRot);
         if(isLeftHand){
             GlStateManager.scale(-1, 1, 1);
             if (this.itemToRender != null) {
