@@ -41,13 +41,11 @@ public class GuiConfig extends GuiScreen {
         buttonList.add(sliders = new GuiSlider(new GuiSliderResponder(), 4, width/2, height/2+10,
                 "zPos", -0.5F, 0.25F, (float) zGui, (id,name,value)->name+" "+String.format("%.2f", value)));
 
-        buttonList.add(sliders = new GuiSlider(new GuiSliderResponder(), 5, width/2-75, height/2-50,
-                "Angle", -90, 90, angle, (id,name,value)->name+" "+String.format("%.0f", value)));
-        buttonList.add(sliders = new GuiSlider(new GuiSliderResponder(), 6, width/2-150, height/2-30,
+        buttonList.add(sliders = new GuiSlider(new GuiSliderResponder(), 5, width/2-150, height/2-30,
                 "xRot", -0.5F, 0.5F, xRot, (id,name,value)->name+" "+String.format("%.2f", value)));
-        buttonList.add(sliders = new GuiSlider(new GuiSliderResponder(), 7, width/2-150, height/2-10,
+        buttonList.add(sliders = new GuiSlider(new GuiSliderResponder(), 6, width/2-150, height/2-10,
                 "yRot", -0.5F, 0.5F, yRot, (id,name,value)->name+" "+String.format("%.2f", value)));
-        buttonList.add(sliders = new GuiSlider(new GuiSliderResponder(), 8, width/2-150, height/2+10,
+        buttonList.add(sliders = new GuiSlider(new GuiSliderResponder(), 7, width/2-150, height/2+10,
                 "zRot", -0.5F, 0.5F, zRot, (id,name,value)->name+" "+String.format("%.2f", value)));
         super.initGui();
     }
