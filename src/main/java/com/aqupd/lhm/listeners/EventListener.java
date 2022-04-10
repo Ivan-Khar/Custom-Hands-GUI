@@ -10,10 +10,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EventListener {
-    @SideOnly(Side.CLIENT)
-    @SubscribeEvent
-    public void onKeyPressed(KeyInputEvent event){
-        if(Registrations.keyBindings[0].isKeyDown()) LeftHandedMod.changeHands();
-        if(Registrations.keyBindings[1].isKeyDown()) Minecraft.getMinecraft().displayGuiScreen(new GuiConfig());
-    }
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void onKeyPressed(KeyInputEvent event) {
+		if (Registrations.keyBindings[0].isKeyDown()) LeftHandedMod.changeHands();
+		if (Registrations.keyBindings[1].isKeyDown()) Minecraft.getMinecraft().displayGuiScreen(new GuiConfig());
+	}
 }

@@ -24,9 +24,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
-
 @Mod(modid = LeftHandedMod.MOD_ID, name = LeftHandedMod.MOD_NAME, version = LeftHandedMod.VERSION, clientSideOnly = true)
 public class LeftHandedMod {
+
 	public static final String MOD_ID = "lhm";
 	public static final String MOD_NAME = "Left Handed Mod";
 	public static final String VERSION = "1.1";
@@ -52,11 +52,11 @@ public class LeftHandedMod {
 		MinecraftForge.EVENT_BUS.register(eventListener);
 	}
 
-	public static void changeHands(){
+	public static void changeHands() {
 		isLeftHand = !isLeftHand;
 	}
 
-	public static void resetHands(){
+	public static void resetHands() {
 		xGui = 0;
 		yGui = 0;
 		zGui = 0;
@@ -65,8 +65,8 @@ public class LeftHandedMod {
 		zRot = 0.0F;
 	}
 
-	public static void setHandPos(String xyz, Double value){
-		switch(xyz){
+	public static void setHandPos(String xyz, Double value) {
+		switch (xyz) {
 			case "x":
 				xGui = value;
 				break;
@@ -78,8 +78,9 @@ public class LeftHandedMod {
 				break;
 		}
 	}
-	public static void setHandRot(String xyz, Float value){
-		switch(xyz){
+
+	public static void setHandRot(String xyz, Float value) {
+		switch (xyz) {
 			case "x":
 				xRot = value;
 				break;
