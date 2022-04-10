@@ -1,15 +1,16 @@
 package com.aqupd.lhm.gui;
 
-import static com.aqupd.lhm.LeftHandedMod.*;
-
 import com.aqupd.lhm.LeftHandedMod;
-import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiSlider;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
+
+import static com.aqupd.lhm.LeftHandedMod.*;
 
 public class GuiConfig extends GuiScreen {
 
@@ -29,19 +30,19 @@ public class GuiConfig extends GuiScreen {
 	@Override
 	public void initGui() {
 		buttonList.clear();
-		buttonList.add(buttons = new GuiButton(0, width / 2 - 32, height - 42, 64, 20, "Swap Hands"));
-		buttonList.add(buttons = new GuiButton(1, width / 2 - 64, height / 2 + 30, 128, 20, "Reset Position"));
+		buttonList.add(buttons = new GuiButton(0, width / 2 - 32, height - 44, 64, 20, "Swap Hands"));
+		buttonList.add(buttons = new GuiButton(1, width / 2 - 64, height / 2 + 32, 128, 20, "Reset Position"));
 
 		buttonList.add(
 			sliders =
 				new GuiSlider(
 					new GuiSliderResponder(),
 					2,
-					width / 2,
+					width / 2 + 2,
 					height / 2 - 30,
 					"xPos",
-					-0.5F,
-					0.25F,
+					-1F,
+					1F,
 					(float) xGui,
 					(id, name, value) -> name + " " + String.format("%.2f", value)
 				)
@@ -51,11 +52,11 @@ public class GuiConfig extends GuiScreen {
 				new GuiSlider(
 					new GuiSliderResponder(),
 					3,
-					width / 2,
+					width / 2 + 2,
 					height / 2 - 10,
 					"yPos",
-					-0.5F,
-					0.25F,
+					-1F,
+					1F,
 					(float) yGui,
 					(id, name, value) -> name + " " + String.format("%.2f", value)
 				)
@@ -65,11 +66,11 @@ public class GuiConfig extends GuiScreen {
 				new GuiSlider(
 					new GuiSliderResponder(),
 					4,
-					width / 2,
+					width / 2 + 2,
 					height / 2 + 10,
 					"zPos",
-					-0.5F,
-					0.25F,
+					-1F,
+					1F,
 					(float) zGui,
 					(id, name, value) -> name + " " + String.format("%.2f", value)
 				)
@@ -80,13 +81,13 @@ public class GuiConfig extends GuiScreen {
 				new GuiSlider(
 					new GuiSliderResponder(),
 					5,
-					width / 2 - 150,
+					width / 2 - 152,
 					height / 2 - 30,
 					"xRot",
-					-0.5F,
-					0.5F,
+					-90F,
+					90F,
 					xRot,
-					(id, name, value) -> name + " " + String.format("%.2f", value)
+					(id, name, value) -> name + " " + (int) value
 				)
 		);
 		buttonList.add(
@@ -94,13 +95,13 @@ public class GuiConfig extends GuiScreen {
 				new GuiSlider(
 					new GuiSliderResponder(),
 					6,
-					width / 2 - 150,
+					width / 2 - 152,
 					height / 2 - 10,
 					"yRot",
-					-0.5F,
-					0.5F,
+					-90F,
+					90F,
 					yRot,
-					(id, name, value) -> name + " " + String.format("%.2f", value)
+					(id, name, value) -> name + " " + (int) value
 				)
 		);
 		buttonList.add(
@@ -108,13 +109,13 @@ public class GuiConfig extends GuiScreen {
 				new GuiSlider(
 					new GuiSliderResponder(),
 					7,
-					width / 2 - 150,
+					width / 2 - 152,
 					height / 2 + 10,
 					"zRot",
-					-0.5F,
-					0.5F,
+					-90F,
+					90F,
 					zRot,
-					(id, name, value) -> name + " " + String.format("%.2f", value)
+					(id, name, value) -> name + " " + (int) value
 				)
 		);
 		super.initGui();
@@ -128,6 +129,8 @@ public class GuiConfig extends GuiScreen {
 				break;
 			case 1:
 				LeftHandedMod.resetHands();
+				mc.displayGuiScreen(null);
+				mc.displayGuiScreen(new GuiConfig());
 				break;
 		}
 		super.actionPerformed(button);

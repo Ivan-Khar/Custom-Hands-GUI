@@ -1,9 +1,5 @@
 package com.aqupd.lhm.mixins;
 
-import static com.aqupd.lhm.LeftHandedMod.*;
-import static org.lwjgl.opengl.GL11.GL_BACK;
-import static org.lwjgl.opengl.GL11.GL_FRONT;
-
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.ItemStack;
@@ -12,6 +8,10 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import static com.aqupd.lhm.LeftHandedMod.*;
+import static org.lwjgl.opengl.GL11.GL_BACK;
+import static org.lwjgl.opengl.GL11.GL_FRONT;
 
 @Mixin(ItemRenderer.class)
 public class MixinItemRenderer {
@@ -23,9 +23,9 @@ public class MixinItemRenderer {
 	public void renderItemInFirstPerson(float partialTicks, CallbackInfo ci) {
 		int k = isLeftHand ? -1 : 1;
 		GlStateManager.translate(xGui * k, yGui, zGui);
-		GlStateManager.rotate(xRot * k, 1, 0, 0);
-		GlStateManager.rotate(yRot, 0, 1, 0);
-		GlStateManager.rotate(zRot, 0, 0, 1);
+		GlStateManager.rotate(xRot, 1, 0, 0);
+		GlStateManager.rotate(yRot * k, 0, 1, 0);
+		GlStateManager.rotate(zRot * k, 0, 0, 1);
 		if (isLeftHand) {
 			GlStateManager.scale(-1, 1, 1);
 			if (this.itemToRender != null) {
