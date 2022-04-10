@@ -21,17 +21,37 @@ public class GuiConfig extends GuiScreen {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		GL11.glColor4f(1, 1, 1, 1);
 		mc.renderEngine.bindTexture(new ResourceLocation(LeftHandedMod.MOD_ID, "textures/gui/ConfigGUI.png"));
-		//drawDefaultBackground();
-		//drawTexturedModalRect(guiX, guiY, 0, 0, guiWidth, guiHeight);
+		drawTexturedModalRect(width/2+10, height/2-172, 0, 0, 128, 128);
 
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 
 	@Override
 	public void initGui() {
+
 		buttonList.clear();
-		buttonList.add(buttons = new GuiButton(0, width / 2 - 32, height - 44, 64, 20, "Swap Hands"));
-		buttonList.add(buttons = new GuiButton(1, width / 2 - 64, height / 2 + 32, 128, 20, "Reset Position"));
+		buttonList.add(
+			buttons =
+				new GuiButton(
+					0,
+					width / 2 - 32,
+					height - 44,
+					64,
+					20,
+					"Swap Hands"
+				)
+		);
+		buttonList.add(
+			buttons =
+				new GuiButton(
+					1,
+					width / 2 - 64,
+					height / 2 + 32,
+					128,
+					20,
+					"Reset Position"
+				)
+		);
 
 		buttonList.add(
 			sliders =
