@@ -3,4 +3,3 @@
 
 To swap your hand use "F" key
 To open config menu use "G" key
-Hand state resets after restart
