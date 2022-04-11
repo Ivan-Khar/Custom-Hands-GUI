@@ -1,8 +1,8 @@
-package com.aqupd.lhm.listeners;
+package com.aqupd.customgui.listeners;
 
-import com.aqupd.lhm.LeftHandedMod;
-import com.aqupd.lhm.gui.GuiConfig;
-import com.aqupd.lhm.setup.Registrations;
+import com.aqupd.customgui.gui.GuiConfig;
+import com.aqupd.customgui.setup.Registrations;
+import com.aqupd.customgui.util.Configuration;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
@@ -14,7 +14,7 @@ public class EventListener {
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onKeyPressed(KeyInputEvent event) {
-		if (Registrations.keyBindings[0].isKeyDown()) LeftHandedMod.changeHands();
+		if (Registrations.keyBindings[0].isKeyDown()) Configuration.changeHands();
 		if (Registrations.keyBindings[1].isKeyDown()) Minecraft.getMinecraft().displayGuiScreen(new GuiConfig());
 	}
 }

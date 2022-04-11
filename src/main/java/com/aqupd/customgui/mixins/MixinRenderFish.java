@@ -1,6 +1,6 @@
-package com.aqupd.lhm.mixins;
+package com.aqupd.customgui.mixins;
 
-import static com.aqupd.lhm.LeftHandedMod.isLeftHand;
+import static com.aqupd.customgui.util.Configuration.*;
 
 import net.minecraft.client.renderer.entity.RenderFish;
 import org.spongepowered.asm.mixin.Mixin;

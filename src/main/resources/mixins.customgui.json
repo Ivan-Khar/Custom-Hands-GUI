@@ -1,9 +1,10 @@
 {
-  "package": "com.aqupd.lhm.mixins",
-  "refmap": "mixins.lhm.refmap.json",
+  "package": "com.aqupd.customgui.mixins",
+  "refmap": "mixins.customgui.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "mixins": [],
   "client": [
+    "MixinGUIChat",
     "MixinItemRenderer",
     "MixinRenderFish"
   ]

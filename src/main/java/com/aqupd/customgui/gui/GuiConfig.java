@@ -1,15 +1,17 @@
-package com.aqupd.lhm.gui;
+package com.aqupd.customgui.gui;
 
-import static com.aqupd.lhm.LeftHandedMod.*;
-
-import com.aqupd.lhm.LeftHandedMod;
-import java.io.IOException;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiSlider;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
+
+import static com.aqupd.customgui.CustomHandGUI.MOD_ID;
+import static com.aqupd.customgui.util.Configuration.*;
 
 public class GuiConfig extends GuiScreen {
 
@@ -19,8 +21,10 @@ public class GuiConfig extends GuiScreen {
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		GL11.glColor4f(1, 1, 1, 1);
-		mc.renderEngine.bindTexture(new ResourceLocation(LeftHandedMod.MOD_ID, "textures/gui/ConfigGUI.png"));
-		drawTexturedModalRect(width / 2 + 10, height / 2 - 172, 0, 0, 128, 128);
+		mc.renderEngine.bindTexture(new ResourceLocation(MOD_ID, "textures/gui/ConfigGUI.png"));
+		if (isLeftHand) drawTexturedModalRect(width / 2 + 10, height / 2 - 172, 0, 0, 128, 128);
+		else drawTexturedModalRect(width/2+10, height - 44 - 84 - 128, 128, 0, 128, 128);
+		drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "Hand GUI Editor",width/2, 10, 16777215);
 
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
@@ -28,8 +32,10 @@ public class GuiConfig extends GuiScreen {
 	@Override
 	public void initGui() {
 		buttonList.clear();
-		buttonList.add(buttons = new GuiButton(0, width / 2 - 32, height - 44, 64, 20, "Swap Hands"));
-		buttonList.add(buttons = new GuiButton(1, width / 2 - 64, height / 2 + 32, 128, 20, "Reset Position"));
+		buttonList.add(buttons = new GuiButton(0, width / 2 - 96/2, height - 44, 96, 20, "Swap Hands"));
+		buttonList.add(buttons = new GuiButton(8, width / 2 - 96/2 - 96 - 2, height - 44, 96, 20, "Swap Chat: " + swapChat));
+		buttonList.add(buttons = new GuiButton(9, width / 2 + 96/2 + 2, height - 44, 96, 20, "AutoUpdate: " + update));
+		buttonList.add(buttons = new GuiButton(1, width / 2 - 64, height - 44 - 22, 128, 20, "Reset Position"));
 
 		buttonList.add(
 			sliders =
@@ -37,11 +43,11 @@ public class GuiConfig extends GuiScreen {
 					new GuiSliderResponder(),
 					2,
 					width / 2 + 2,
-					height / 2 - 30,
-					"xPos",
+					height - 44 - 44,
+					"zPos",
 					-1F,
 					1F,
-					(float) xGui,
+					(float) zGui,
 					(id, name, value) -> name + " " + String.format("%.2f", value)
 				)
 		);
@@ -51,7 +57,7 @@ public class GuiConfig extends GuiScreen {
 					new GuiSliderResponder(),
 					3,
 					width / 2 + 2,
-					height / 2 - 10,
+					height - 44 - 64,
 					"yPos",
 					-1F,
 					1F,
@@ -65,11 +71,11 @@ public class GuiConfig extends GuiScreen {
 					new GuiSliderResponder(),
 					4,
 					width / 2 + 2,
-					height / 2 + 10,
-					"zPos",
+					height - 44 - 84,
+					"xPos",
 					-1F,
 					1F,
-					(float) zGui,
+					(float) xGui,
 					(id, name, value) -> name + " " + String.format("%.2f", value)
 				)
 		);
@@ -80,11 +86,11 @@ public class GuiConfig extends GuiScreen {
 					new GuiSliderResponder(),
 					5,
 					width / 2 - 152,
-					height / 2 - 30,
-					"xRot",
-					-90F,
-					90F,
-					xRot,
+					height - 44 - 44,
+					"zRot",
+					-179F,
+					180F,
+					zRot,
 					(id, name, value) -> name + " " + (int) value
 				)
 		);
@@ -94,10 +100,10 @@ public class GuiConfig extends GuiScreen {
 					new GuiSliderResponder(),
 					6,
 					width / 2 - 152,
-					height / 2 - 10,
+					height - 44 - 64,
 					"yRot",
-					-90F,
-					90F,
+					-179F,
+					180F,
 					yRot,
 					(id, name, value) -> name + " " + (int) value
 				)
@@ -108,11 +114,11 @@ public class GuiConfig extends GuiScreen {
 					new GuiSliderResponder(),
 					7,
 					width / 2 - 152,
-					height / 2 + 10,
-					"zRot",
-					-90F,
-					90F,
-					zRot,
+					height - 44 - 84,
+					"xRot",
+					-179F,
+					180F,
+					xRot,
 					(id, name, value) -> name + " " + (int) value
 				)
 		);
@@ -123,11 +129,18 @@ public class GuiConfig extends GuiScreen {
 	protected void actionPerformed(GuiButton button) throws IOException {
 		switch (button.id) {
 			case 0:
-				LeftHandedMod.changeHands();
+				changeHands();
 				break;
 			case 1:
-				LeftHandedMod.resetHands();
-				mc.displayGuiScreen(null);
+				resetHands();
+				mc.displayGuiScreen(new GuiConfig());
+				break;
+			case 8:
+				changeChat();
+				mc.displayGuiScreen(new GuiConfig());
+				break;
+			case 9:
+				changeUpdate();
 				mc.displayGuiScreen(new GuiConfig());
 				break;
 		}

@@ -19,8 +19,8 @@ apply plugin: 'com.github.johnrengelman.shadow'
 
 version = "debug"
 group = "com.aqupd"
-archivesBaseName = "lhm"
-String modid = "lhm"
+archivesBaseName = "customgui"
+String modid = "customgui"
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 compileJava.options.encoding = 'UTF-8'
