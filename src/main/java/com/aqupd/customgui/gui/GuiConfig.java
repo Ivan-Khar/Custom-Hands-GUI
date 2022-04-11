@@ -22,8 +22,8 @@ public class GuiConfig extends GuiScreen {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		GL11.glColor4f(1, 1, 1, 1);
 		mc.renderEngine.bindTexture(new ResourceLocation(MOD_ID, "textures/gui/ConfigGUI.png"));
-		if (isLeftHand) drawTexturedModalRect(width / 2 + 10, height / 2 - 172, 0, 0, 128, 128);
-		else drawTexturedModalRect(width/2+10, height - 44 - 84 - 128, 128, 0, 128, 128);
+		if (isLeftHand) drawTexturedModalRect(width / 2 + 10, height - 44 - 84 - 128, 0, 0, 128, 128);
+		else drawTexturedModalRect(width / 2 + 10, height - 44 - 84 - 128, 128, 0, 128, 128);
 		drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "Hand GUI Editor",width/2, 10, 16777215);
 
 		super.drawScreen(mouseX, mouseY, partialTicks);
