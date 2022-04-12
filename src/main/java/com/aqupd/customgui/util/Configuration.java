@@ -44,6 +44,13 @@ public class Configuration {
         saveOptions();
     }
 
+    public static void randomizeHands() {
+        xGui = Math.random()*-1+0.5;
+        yGui = Math.random()*-1+1;
+        zGui = Math.random()*-2;
+        saveOptions();
+    }
+
     public static void setHandPos(String xyz, Double value) {
         switch (xyz) {
             case "x":
@@ -78,7 +85,7 @@ public class Configuration {
         if (!configFile.exists() || configFile.length() == 0) saveOptions();
 
         BufferedReader bufferedreader = new BufferedReader(new FileReader(configFile));
-        String s = "";
+        String s;
 
         while ((s = bufferedreader.readLine()) != null) {
             String[] astring = s.split(":");
@@ -115,7 +122,7 @@ public class Configuration {
             }
         }
         catch(Exception exception){
-            LOGGER.error((String) logprefix + "Failed to save options", (Throwable) exception);
+            LOGGER.error(logprefix + "Failed to save options", exception);
         }
     }
 }

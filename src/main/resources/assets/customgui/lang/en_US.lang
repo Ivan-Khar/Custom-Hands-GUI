@@ -1,3 +1,18 @@
 key.aqupd.categories.handgui=Hands GUI
 key.aqupd.changehands=Change main hand
+key.aqupd.resethands=Reset Hands position and rotation
+key.aqupd.randomize=Randomize Hands position
 key.aqupd.configgui=Open Config
+
+config.aqupd.rotation=Rotation
+config.aqupd.position=Position
+
+config.aqupd.swaphands=Swap Hands
+config.aqupd.swapchat=Swap Chat
+config.aqupd.autorefresh=Auto Refresh
+config.aqupd.resetposition=Reset Position
+
+config.aqupd.swaphands.desc=Swaps hands
+config.aqupd.resetposition.desc=Sets Positions and Rotations to 0
+config.aqupd.swapchat.desc=Changes chat position to the right side if your main hand is on the left side.
+config.aqupd.autorefresh.desc=Updates configuration file every 1 second.

@@ -11,6 +11,7 @@ public class GuiSliderResponder implements GuiPageButtonList.GuiResponder {
 	@Override
 	public void onTick(int id, float value) {
 		String val = String.format(java.util.Locale.US,"%.2f", value);
+		String valint = String.valueOf(Math.floor(value));
 		switch (id) {
 			case 2:
 				Configuration.setHandPos("z", Double.parseDouble(val));
@@ -22,13 +23,13 @@ public class GuiSliderResponder implements GuiPageButtonList.GuiResponder {
 				Configuration.setHandPos("x", Double.parseDouble(val));
 				break;
 			case 5:
-				Configuration.setHandRot("z", Float.parseFloat(val));
+				Configuration.setHandRot("z", Float.parseFloat(valint));
 				break;
 			case 6:
-				Configuration.setHandRot("y", Float.parseFloat(val));
+				Configuration.setHandRot("y", Float.parseFloat(valint));
 				break;
 			case 7:
-				Configuration.setHandRot("x", Float.parseFloat(val));
+				Configuration.setHandRot("x", Float.parseFloat(valint));
 				break;
 		}
 	}

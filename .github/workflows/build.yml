@@ -5,13 +5,13 @@ on:
     branches: [ main ]
     paths-ignore:
       - 'README.md'
-      - 'LICENSE'
+      - 'LICENSE.md'
       - '.gitignore'
   pull_request:
     branches: [ main ]
     paths-ignore:
       - 'README.md'
-      - 'LICENSE'
+      - 'LICENSE.md'
       - '.gitignore'
   workflow_dispatch:
 jobs:

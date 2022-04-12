@@ -11,8 +11,8 @@
       "Aqua_tic(AqUpd)"
     ],
     "credits": "nekoli",
-    "logoFile": "",
-    "screenshots": [],
+    "logoFile": "icon.png",
+    "screenshots": ["screenshot1.png", "screenshot2.png"],
     "dependencies": []
   }
 ]
