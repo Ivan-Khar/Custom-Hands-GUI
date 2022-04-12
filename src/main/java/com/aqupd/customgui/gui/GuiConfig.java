@@ -1,5 +1,10 @@
 package com.aqupd.customgui.gui;
 
+import static com.aqupd.customgui.CustomHandGUI.MOD_ID;
+import static com.aqupd.customgui.util.Configuration.*;
+
+import java.io.IOException;
+import java.util.Collections;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -8,12 +13,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
-
-import java.io.IOException;
-import java.util.Collections;
-
-import static com.aqupd.customgui.CustomHandGUI.MOD_ID;
-import static com.aqupd.customgui.util.Configuration.*;
 
 public class GuiConfig extends GuiScreen {
 
@@ -24,27 +23,65 @@ public class GuiConfig extends GuiScreen {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		GL11.glColor4f(1, 1, 1, 1);
 		mc.renderEngine.bindTexture(new ResourceLocation(MOD_ID, "textures/gui/ConfigGUI.png"));
-		if (isLeftHand) drawTexturedModalRect(width / 2 + 10, height - 44 - 84 - 16 - 128, 0, 0, 128, 128);
-		else drawTexturedModalRect(width / 2 + 10, height - 44 - 84 - 16 - 128, 128, 0, 128, 128);
-		drawCenteredString(Minecraft.getMinecraft().fontRendererObj, I18n.format("config.aqupd.position"),width/2 + 75 + 2, height - 44 - 84 - 16, 16777215);
-		drawCenteredString(Minecraft.getMinecraft().fontRendererObj, I18n.format("config.aqupd.rotation"),width/2 - 75 - 2, height - 44 - 84 - 16, 16777215);
-		drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "Hand GUI Editor",width/2, 10, 16777215);
+		if (isLeftHand) drawTexturedModalRect(width / 2 + 10, height - 44 - 84 - 16 - 128, 0, 0, 128, 128); else drawTexturedModalRect(
+			width / 2 + 10,
+			height - 44 - 84 - 16 - 128,
+			128,
+			0,
+			128,
+			128
+		);
+		drawCenteredString(
+			Minecraft.getMinecraft().fontRendererObj,
+			I18n.format("config.aqupd.position"),
+			width / 2 + 75 + 2,
+			height - 44 - 84 - 16,
+			16777215
+		);
+		drawCenteredString(
+			Minecraft.getMinecraft().fontRendererObj,
+			I18n.format("config.aqupd.rotation"),
+			width / 2 - 75 - 2,
+			height - 44 - 84 - 16,
+			16777215
+		);
+		drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "Hand GUI Editor", width / 2, 10, 16777215);
 
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		for (GuiButton guiButton : buttonList) {
 			if (guiButton != null && guiButton.isMouseOver()) {
 				switch (guiButton.id) {
 					case 0:
-						drawHoveringText(Collections.singletonList(I18n.format("config.aqupd.swaphands.desc")), mouseX, mouseY, fontRendererObj);
+						drawHoveringText(
+							Collections.singletonList(I18n.format("config.aqupd.swaphands.desc")),
+							mouseX,
+							mouseY,
+							fontRendererObj
+						);
 						break;
 					case 1:
-						drawHoveringText(Collections.singletonList(I18n.format("config.aqupd.resetposition.desc")), mouseX, mouseY, fontRendererObj);
+						drawHoveringText(
+							Collections.singletonList(I18n.format("config.aqupd.resetposition.desc")),
+							mouseX,
+							mouseY,
+							fontRendererObj
+						);
 						break;
 					case 8:
-						drawHoveringText(Collections.singletonList(I18n.format("config.aqupd.swapchat.desc")), mouseX, mouseY, fontRendererObj);
+						drawHoveringText(
+							Collections.singletonList(I18n.format("config.aqupd.swapchat.desc")),
+							mouseX,
+							mouseY,
+							fontRendererObj
+						);
 						break;
 					case 9:
-						drawHoveringText(Collections.singletonList(I18n.format("config.aqupd.autorefresh.desc")), mouseX, mouseY, fontRendererObj);
+						drawHoveringText(
+							Collections.singletonList(I18n.format("config.aqupd.autorefresh.desc")),
+							mouseX,
+							mouseY,
+							fontRendererObj
+						);
 						break;
 				}
 			}
@@ -54,14 +91,30 @@ public class GuiConfig extends GuiScreen {
 	@Override
 	public void initGui() {
 		buttonList.clear();
-		buttonList.add(buttons = new GuiButton(0, width / 2 - 128/2, height - 44,
-				128, 20, I18n.format("config.aqupd.swaphands")));
-		buttonList.add(buttons = new GuiButton(8, width / 2 - 128/2 - 128 - 2, height - 44,
-				128, 20, I18n.format("config.aqupd.swapchat") + ": " + (swapChat ? I18n.format("gui.yes") : I18n.format("gui.no"))));
-		buttonList.add(buttons = new GuiButton(9, width / 2 + 128/2 + 2, height - 44,
-				128, 20, I18n.format("config.aqupd.autorefresh") + ": " + (update ? I18n.format("gui.yes") : I18n.format("gui.no"))));
-		buttonList.add(buttons = new GuiButton(1, width / 2 - 64, height - 44 - 22,
-				128, 20, I18n.format("config.aqupd.resetposition")));
+		buttonList.add(buttons = new GuiButton(0, width / 2 - 128 / 2, height - 44, 128, 20, I18n.format("config.aqupd.swaphands")));
+		buttonList.add(
+			buttons =
+				new GuiButton(
+					8,
+					width / 2 - 128 / 2 - 128 - 2,
+					height - 44,
+					128,
+					20,
+					I18n.format("config.aqupd.swapchat") + ": " + (swapChat ? I18n.format("gui.yes") : I18n.format("gui.no"))
+				)
+		);
+		buttonList.add(
+			buttons =
+				new GuiButton(
+					9,
+					width / 2 + 128 / 2 + 2,
+					height - 44,
+					128,
+					20,
+					I18n.format("config.aqupd.autorefresh") + ": " + (update ? I18n.format("gui.yes") : I18n.format("gui.no"))
+				)
+		);
+		buttonList.add(buttons = new GuiButton(1, width / 2 - 64, height - 44 - 22, 128, 20, I18n.format("config.aqupd.resetposition")));
 
 		buttonList.add(
 			sliders =

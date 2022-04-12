@@ -10,7 +10,7 @@ public class GuiSliderResponder implements GuiPageButtonList.GuiResponder {
 
 	@Override
 	public void onTick(int id, float value) {
-		String val = String.format(java.util.Locale.US,"%.2f", value);
+		String val = String.format(java.util.Locale.US, "%.2f", value);
 		String valint = String.valueOf(Math.floor(value));
 		switch (id) {
 			case 2:

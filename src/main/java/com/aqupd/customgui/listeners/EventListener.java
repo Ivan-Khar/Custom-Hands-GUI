@@ -14,9 +14,10 @@ public class EventListener {
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onKeyPressed(KeyInputEvent event) {
-		if (Registrations.keyBindings[0].isKeyDown()) Configuration.changeHands();
-		else if (Registrations.keyBindings[1].isKeyDown()) Minecraft.getMinecraft().displayGuiScreen(new GuiConfig());
-		else if (Registrations.keyBindings[2].isKeyDown()) Configuration.resetHands();
-		else if (Registrations.keyBindings[3].isKeyDown()) Configuration.randomizeHands();
+		if (Registrations.keyBindings[0].isKeyDown()) Configuration.changeHands(); else if (
+			Registrations.keyBindings[1].isKeyDown()
+		) Minecraft.getMinecraft().displayGuiScreen(new GuiConfig()); else if (
+			Registrations.keyBindings[2].isKeyDown()
+		) Configuration.resetHands(); else if (Registrations.keyBindings[3].isKeyDown()) Configuration.randomizeHands();
 	}
 }
