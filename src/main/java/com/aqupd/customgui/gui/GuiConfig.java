@@ -1,10 +1,5 @@
 package com.aqupd.customgui.gui;
 
-import static com.aqupd.customgui.CustomHandGUI.MOD_ID;
-import static com.aqupd.customgui.util.Configuration.*;
-
-import java.io.IOException;
-import java.util.Collections;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -13,6 +8,12 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
+import java.util.Collections;
+
+import static com.aqupd.customgui.CustomHandGUI.*;
+import static com.aqupd.customgui.util.Configuration.*;
 
 public class GuiConfig extends GuiScreen {
 
@@ -23,14 +24,25 @@ public class GuiConfig extends GuiScreen {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		GL11.glColor4f(1, 1, 1, 1);
 		mc.renderEngine.bindTexture(new ResourceLocation(MOD_ID, "textures/gui/ConfigGUI.png"));
-		if (isLeftHand) drawTexturedModalRect(width / 2 + 10, height - 44 - 84 - 16 - 128, 0, 0, 128, 128); else drawTexturedModalRect(
-			width / 2 + 10,
-			height - 44 - 84 - 16 - 128,
-			128,
-			0,
-			128,
-			128
-		);
+		if (isLeftHand) {
+			drawTexturedModalRect(
+					width / 2 + 10,
+					height - 44 - 84 - 16 - 128,
+					0,
+					0,
+					128,
+					128
+			);
+		} else {
+			drawTexturedModalRect(
+					width / 2 + 10,
+					height - 44 - 84 - 16 - 128,
+					128,
+					0,
+					128,
+					128
+			);
+		}
 		drawCenteredString(
 			Minecraft.getMinecraft().fontRendererObj,
 			I18n.format("config.aqupd.position"),
@@ -91,115 +103,135 @@ public class GuiConfig extends GuiScreen {
 	@Override
 	public void initGui() {
 		buttonList.clear();
-		buttonList.add(buttons = new GuiButton(0, width / 2 - 128 / 2, height - 44, 128, 20, I18n.format("config.aqupd.swaphands")));
 		buttonList.add(
-			buttons =
-				new GuiButton(
-					8,
-					width / 2 - 128 / 2 - 128 - 2,
-					height - 44,
-					128,
-					20,
-					I18n.format("config.aqupd.swapchat") + ": " + (swapChat ? I18n.format("gui.yes") : I18n.format("gui.no"))
-				)
+				buttons =
+						new GuiButton(
+								0,
+								width / 2 - 128 / 2,
+								height - 44,
+								128,
+								20,
+								I18n.format("config.aqupd.swaphands")
+						)
 		);
 		buttonList.add(
-			buttons =
-				new GuiButton(
-					9,
-					width / 2 + 128 / 2 + 2,
-					height - 44,
-					128,
-					20,
-					I18n.format("config.aqupd.autorefresh") + ": " + (update ? I18n.format("gui.yes") : I18n.format("gui.no"))
-				)
-		);
-		buttonList.add(buttons = new GuiButton(1, width / 2 - 64, height - 44 - 22, 128, 20, I18n.format("config.aqupd.resetposition")));
-
-		buttonList.add(
-			sliders =
-				new GuiSlider(
-					new GuiSliderResponder(),
-					2,
-					width / 2 + 2,
-					height - 44 - 44,
-					"z",
-					-10F,
-					1F,
-					(float) zGui,
-					(id, name, value) -> name + ": " + String.format("%.2f", value)
-				)
+				buttons =
+						new GuiButton(
+								8,
+								width / 2 - 128 / 2 - 128 - 2,
+								height - 44,
+								128,
+								20,
+								I18n.format("config.aqupd.swapchat") + ": " + (swapChat ? I18n.format("gui.yes") : I18n.format("gui.no"))
+						)
 		);
 		buttonList.add(
-			sliders =
-				new GuiSlider(
-					new GuiSliderResponder(),
-					3,
-					width / 2 + 2,
-					height - 44 - 64,
-					"y",
-					-5F,
-					5F,
-					(float) yGui,
-					(id, name, value) -> name + ": " + String.format("%.2f", value)
-				)
+				buttons =
+						new GuiButton(
+								9,
+								width / 2 + 128 / 2 + 2,
+								height - 44,
+								128,
+								20,
+								I18n.format("config.aqupd.autorefresh") + ": " + (update ? I18n.format("gui.yes") : I18n.format("gui.no"))
+						)
 		);
 		buttonList.add(
-			sliders =
-				new GuiSlider(
-					new GuiSliderResponder(),
-					4,
-					width / 2 + 2,
-					height - 44 - 84,
-					"x",
-					-5F,
-					10F,
-					(float) xGui,
-					(id, name, value) -> name + ": " + String.format("%.2f", value)
-				)
+				buttons =
+						new GuiButton(
+								1,
+								width / 2 - 64,
+								height - 44 - 22,
+								128,
+								20,
+								I18n.format("config.aqupd.resetposition")
+						)
 		);
 
 		buttonList.add(
-			sliders =
-				new GuiSlider(
-					new GuiSliderResponder(),
-					5,
-					width / 2 - 152,
-					height - 44 - 44,
-					"z",
-					-179F,
-					180F,
-					zRot,
-					(id, name, value) -> name + ": " + (int) value
-				)
+				sliders =
+						new GuiSlider(
+								new GuiSliderResponder(),
+								2,
+								width / 2 + 2,
+								height - 44 - 44,
+								"z",
+								-10F,
+								1F,
+								(float) zGui,
+								(id, name, value) -> name + ": " + String.format("%.2f", value)
+						)
 		);
 		buttonList.add(
-			sliders =
-				new GuiSlider(
-					new GuiSliderResponder(),
-					6,
-					width / 2 - 152,
-					height - 44 - 64,
-					"y",
-					-179F,
-					180F,
-					yRot,
-					(id, name, value) -> name + ": " + (int) value
-				)
+				sliders =
+						new GuiSlider(
+								new GuiSliderResponder(),
+								3,
+								width / 2 + 2,
+								height - 44 - 65,
+								"y",
+								-5F,
+								5F,
+								(float) yGui,
+								(id, name, value) -> name + ": " + String.format("%.2f", value)
+						)
 		);
 		buttonList.add(
-			sliders =
-				new GuiSlider(
-					new GuiSliderResponder(),
-					7,
-					width / 2 - 152,
-					height - 44 - 84,
-					"x",
-					-179F,
-					180F,
-					xRot,
-					(id, name, value) -> name + ": " + (int) value
-				)
+				sliders =
+						new GuiSlider(
+								new GuiSliderResponder(),
+								4,
+								width / 2 + 2,
+								height - 44 - 86,
+								"x",
+								-5F,
+								10F,
+								(float) xGui,
+								(id, name, value) -> name + ": " + String.format("%.2f", value)
+						)
+		);
+
+		buttonList.add(
+				sliders =
+						new GuiSlider(
+								new GuiSliderResponder(),
+								5,
+								width / 2 - 152,
+								height - 44 - 44,
+								"z",
+								-179F,
+								180F,
+								zRot,
+								(id, name, value) -> name + ": " + (int) value
+						)
+		);
+		buttonList.add(
+				sliders =
+						new GuiSlider(
+								new GuiSliderResponder(),
+								6,
+								width / 2 - 152,
+								height - 44 - 65,
+								"y",
+								-179F,
+								180F,
+								yRot,
+								(id, name, value) -> name + ": " + (int) value
+						)
+		);
+		buttonList.add(
+				sliders =
+						new GuiSlider(
+								new GuiSliderResponder(),
+								7,
+								width / 2 - 152,
+								height - 44 - 86,
+								"x",
+								-179F,
+								180F,
+								xRot,
+								(id, name, value) -> name + ": " + (int) value
+						)
 		);
 		super.initGui();
 	}
@@ -235,5 +267,56 @@ public class GuiConfig extends GuiScreen {
 				break;
 		}
 		super.keyTyped(typedChar, keyCode);
+	}
+
+	@Override
+	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+		super.mouseClicked(mouseX, mouseY, mouseButton);
+		if((width/2+2 <= mouseX) && (width/2+2+150 >= mouseX)){
+			if((height-44-86 <= mouseY) && (height-44-86+20 >= mouseY)) {
+				if((xguitimer + 200) > System.currentTimeMillis()){
+					setHandPos("x", (double) 0);
+					mc.displayGuiScreen(new GuiConfig());
+				}
+				xguitimer = System.currentTimeMillis();
+			}
+			if((height-44-65 <= mouseY) && (height-44-65+20 >= mouseY)) {
+				if((yguitimer + 200) > System.currentTimeMillis()){
+					setHandPos("y", (double) 0);
+					mc.displayGuiScreen(new GuiConfig());
+				}
+				yguitimer = System.currentTimeMillis();
+			}
+			if((height-44-44 <= mouseY) && (height-44-44+20 >= mouseY)) {
+				if((zguitimer + 200) > System.currentTimeMillis()){
+					setHandPos("z", (double) 0);
+					mc.displayGuiScreen(new GuiConfig());
+				}
+				zguitimer = System.currentTimeMillis();
+			}
+		}
+		if((width/2-2 >= mouseX) && (width/2-2-150 <= mouseX)){
+			if((height-44-86 <= mouseY) && (height-44-86+20 >= mouseY)) {
+				if((xrottimer + 200) > System.currentTimeMillis()){
+					setHandRot("x", (float) 0);
+					mc.displayGuiScreen(new GuiConfig());
+				}
+				xrottimer = System.currentTimeMillis();
+			}
+			if((height-44-65 <= mouseY) && (height-44-65+20 >= mouseY)) {
+				if((yrottimer + 200) > System.currentTimeMillis()){
+					setHandRot("y", (float) 0);
+					mc.displayGuiScreen(new GuiConfig());
+				}
+				yrottimer = System.currentTimeMillis();
+			}
+			if((height-44-44 <= mouseY) && (height-44-44+20 >= mouseY)) {
+				if((zrottimer + 200) > System.currentTimeMillis()){
+					setHandRot("z", (float) 0);
+					mc.displayGuiScreen(new GuiConfig());
+				}
+				zrottimer = System.currentTimeMillis();
+			}
+		}
 	}
 }

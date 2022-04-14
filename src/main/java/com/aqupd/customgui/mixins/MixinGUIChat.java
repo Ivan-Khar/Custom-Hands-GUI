@@ -1,8 +1,5 @@
 package com.aqupd.customgui.mixins;
 
-import static com.aqupd.customgui.util.Configuration.isLeftHand;
-import static com.aqupd.customgui.util.Configuration.swapChat;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiNewChat;
 import net.minecraft.client.gui.ScaledResolution;
@@ -10,6 +7,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+
+import static com.aqupd.customgui.util.Configuration.isLeftHand;
+import static com.aqupd.customgui.util.Configuration.swapChat;
 
 @Mixin(GuiNewChat.class)
 public abstract class MixinGUIChat {
@@ -22,7 +22,11 @@ public abstract class MixinGUIChat {
 
 	@ModifyArg(
 		method = "drawChat(I)V",
-		at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/GlStateManager;translate(FFF)V", ordinal = 0),
+		at = @At(
+				value = "INVOKE",
+				target = "Lnet/minecraft/client/renderer/GlStateManager;translate(FFF)V",
+				ordinal = 0
+		),
 		index = 0
 	)
 	private float changeArg(float num) {
