@@ -9,23 +9,24 @@ import java.nio.file.Paths;
 
 public class Configuration {
 
-	public static boolean isLeftHand = true;
 	public static boolean swapChat = false;
 	public static boolean update = false;
-	public static double xGui = 0;
-	public static double yGui = 0;
-	public static double zGui = 0;
+	public static boolean lefthandedit = false;
+	public static double x1Gui = 0;
+	public static double y1Gui = 0;
+	public static double z1Gui = 0;
+	public static double x2Gui = 0;
+	public static double y2Gui = 0;
+	public static double z2Gui = 0;
 
-	public static float xRot = 0.0F;
-	public static float yRot = 0.0F;
-	public static float zRot = 0.0F;
+	public static float x1Rot = 0.0F;
+	public static float y1Rot = 0.0F;
+	public static float z1Rot = 0.0F;
+	public static float x2Rot = 0.0F;
+	public static float y2Rot = 0.0F;
+	public static float z2Rot = 0.0F;
 
 	private static final File configFile = new File("./config/AqMods/CHGUI.properties");
-
-	public static void changeHands() {
-		isLeftHand = !isLeftHand;
-		saveOptions();
-	}
 
 	public static void changeChat() {
 		swapChat = !swapChat;
@@ -37,48 +38,94 @@ public class Configuration {
 		saveOptions();
 	}
 
+	public static void resetHand() {
+		if(lefthandedit) {
+			x2Gui = 0;
+			y2Gui = 0;
+			z2Gui = 0;
+			x2Rot = 0.0F;
+			y2Rot = 0.0F;
+			z2Rot = 0.0F;
+		} else {
+			x1Gui = 0;
+			y1Gui = 0;
+			z1Gui = 0;
+			x1Rot = 0.0F;
+			y1Rot = 0.0F;
+			z1Rot = 0.0F;
+		}
+		saveOptions();
+	}
+
 	public static void resetHands() {
-		xGui = 0;
-		yGui = 0;
-		zGui = 0;
-		xRot = 0.0F;
-		yRot = 0.0F;
-		zRot = 0.0F;
+		x2Gui = 0;
+		y2Gui = 0;
+		z2Gui = 0;
+		x2Rot = 0.0F;
+		y2Rot = 0.0F;
+		z2Rot = 0.0F;
+		x1Gui = 0;
+		y1Gui = 0;
+		z1Gui = 0;
+		x1Rot = 0.0F;
+		y1Rot = 0.0F;
+		z1Rot = 0.0F;
 		saveOptions();
 	}
 
 	public static void randomizeHands() {
-		xGui = Math.random() * -1 + 0.5;
-		yGui = Math.random() * -1 + 1;
-		zGui = Math.random() * -2;
+		x1Gui = Math.random() * -1 + 0.5;
+		y1Gui = Math.random() * -1 + 1;
+		z1Gui = Math.random() * -2;
+		x2Gui = Math.random() * -1 + 0.5;
+		y2Gui = Math.random() * -1 + 1;
+		z2Gui = Math.random() * -2;
 		saveOptions();
 	}
 
-	public static void setHandPos(String xyz, Double value) {
-		switch (xyz) {
-			case "x":
-				xGui = value;
+	public static void setHandPos(String nxyz, Double value) {
+		switch (nxyz) {
+			case "1x":
+				x1Gui = value;
 				break;
-			case "y":
-				yGui = value;
+			case "1y":
+				y1Gui = value;
 				break;
-			case "z":
-				zGui = value;
+			case "1z":
+				z1Gui = value;
+				break;
+			case "2x":
+				x2Gui = value;
+				break;
+			case "2y":
+				y2Gui = value;
+				break;
+			case "2z":
+				z2Gui = value;
 				break;
 		}
 		saveOptions();
 	}
 
-	public static void setHandRot(String xyz, Float value) {
-		switch (xyz) {
-			case "x":
-				xRot = value;
+	public static void setHandRot(String nxyz, Float value) {
+		switch (nxyz) {
+			case "1x":
+				x1Rot = value;
 				break;
-			case "y":
-				yRot = value;
+			case "1y":
+				y1Rot = value;
 				break;
-			case "z":
-				zRot = value;
+			case "1z":
+				z1Rot = value;
+				break;
+			case "2x":
+				x2Rot = value;
+				break;
+			case "2y":
+				y2Rot = value;
+				break;
+			case "2z":
+				z2Rot = value;
 				break;
 		}
 		saveOptions();
@@ -93,13 +140,18 @@ public class Configuration {
 		while ((s = bufferedreader.readLine()) != null) {
 			String[] astring = s.split(":");
 
-			if (astring[0].equals("xGui")) xGui = Double.parseDouble(astring[1]);
-			if (astring[0].equals("yGui")) yGui = Double.parseDouble(astring[1]);
-			if (astring[0].equals("zGui")) zGui = Double.parseDouble(astring[1]);
-			if (astring[0].equals("xRot")) xRot = Float.parseFloat(astring[1]);
-			if (astring[0].equals("yRot")) yRot = Float.parseFloat(astring[1]);
-			if (astring[0].equals("zRot")) zRot = Float.parseFloat(astring[1]);
-			if (astring[0].equals("isLeftHand")) isLeftHand = Boolean.parseBoolean(astring[1]);
+			if (astring[0].equals("x1Gui")) x1Gui = Double.parseDouble(astring[1]);
+			if (astring[0].equals("y1Gui")) y1Gui = Double.parseDouble(astring[1]);
+			if (astring[0].equals("z1Gui")) z1Gui = Double.parseDouble(astring[1]);
+			if (astring[0].equals("x1Rot")) x1Rot = Float.parseFloat(astring[1]);
+			if (astring[0].equals("y1Rot")) y1Rot = Float.parseFloat(astring[1]);
+			if (astring[0].equals("z1Rot")) z1Rot = Float.parseFloat(astring[1]);
+			if (astring[0].equals("x2Gui")) x2Gui = Double.parseDouble(astring[1]);
+			if (astring[0].equals("y2Gui")) y2Gui = Double.parseDouble(astring[1]);
+			if (astring[0].equals("z2Gui")) z2Gui = Double.parseDouble(astring[1]);
+			if (astring[0].equals("x2Rot")) x2Rot = Float.parseFloat(astring[1]);
+			if (astring[0].equals("y2Rot")) y2Rot = Float.parseFloat(astring[1]);
+			if (astring[0].equals("z2Rot")) z2Rot = Float.parseFloat(astring[1]);
 			if (astring[0].equals("swapChat")) swapChat = Boolean.parseBoolean(astring[1]);
 			if (astring[0].equals("update")) update = Boolean.parseBoolean(astring[1]);
 		}
@@ -112,13 +164,18 @@ public class Configuration {
 			if (!configFile.exists()) configFile.createNewFile();
 			if (configFile.exists()) {
 				PrintWriter printwriter = new PrintWriter(new FileWriter(configFile));
-				printwriter.println("xGui:" + xGui);
-				printwriter.println("yGui:" + yGui);
-				printwriter.println("zGui:" + zGui);
-				printwriter.println("xRot:" + xRot);
-				printwriter.println("yRot:" + yRot);
-				printwriter.println("zRot:" + zRot);
-				printwriter.println("isLeftHand:" + isLeftHand);
+				printwriter.println("x1Gui:" + x1Gui);
+				printwriter.println("y1Gui:" + y1Gui);
+				printwriter.println("z1Gui:" + z1Gui);
+				printwriter.println("x1Rot:" + x1Rot);
+				printwriter.println("y1Rot:" + y1Rot);
+				printwriter.println("z1Rot:" + z1Rot);
+				printwriter.println("x2Gui:" + x2Gui);
+				printwriter.println("y2Gui:" + y2Gui);
+				printwriter.println("z2Gui:" + z2Gui);
+				printwriter.println("x2Rot:" + x2Rot);
+				printwriter.println("y2Rot:" + y2Rot);
+				printwriter.println("z2Rot:" + z2Rot);
 				printwriter.println("swapChat:" + swapChat);
 				printwriter.println("update:" + update);
 				printwriter.close();

@@ -1,96 +1,83 @@
 buildscript {
     repositories {
-        maven { url 'https://jitpack.io' }
-        maven { url 'https://repo.spongepowered.org/maven' }
-        maven { url 'https://maven.minecraftforge.net/' }
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        maven { url = "https://repo.spongepowered.org/maven" }
+        mavenCentral()
     }
-
     dependencies {
-        classpath "com.github.asbyth:ForgeGradle:6f53277"
-        classpath 'com.github.xcfrg:MixinGradle:0.6-SNAPSHOT'
-        classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'net.minecraftforge.gradle'
+// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'eclipse'
 
-version = "1.4"
-group = "com.aqupd"
-archivesBaseName = "customgui"
-String modid = "customgui"
+version = minecraft_version + "-" + mod_version
+group = mod_group
+archivesBaseName = mod_id
 
-sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
-compileJava.options.encoding = 'UTF-8'
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    version = "1.8.9-11.15.1.2318-1.8.9"
-    runDir = "run"
-    mappings = "stable_22"
-    makeObfSourceJar = false
-}
+    mappings channel: mappings_channel, version: mappings_version
+    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
-configurations {
-    include
-    implementation.extendsFrom(include)
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+            property 'fml.coreMods.load', mod_core_plugin.replace('${mod_group}', mod_group).replace('${mod_id}', mod_id)
+        }
+
+        server {
+            property 'fml.coreMods.load', mod_core_plugin.replace('${mod_group}', mod_group).replace('${mod_id}', mod_id)
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+        }
+    }
 }
 
 repositories {
-    maven { url 'https://jitpack.io' }
-    maven { url 'https://repo.spongepowered.org/repository/maven-public/' }
-    maven { url 'https://maven.minecraftforge.net/' }
+    maven { url = 'https://repo.spongepowered.org/maven' }
+    maven { url "https://cursemaven.com" }
 }
+
+configurations {
+    embed
+    compile.extendsFrom(embed)
+}
+
+sourceSets {main { output.resourcesDir = output.classesDir }}
 
 dependencies {
-    include("org.spongepowered:mixin:0.7.11-SNAPSHOT") {
-        exclude module: "guava"
-        exclude module: "commons-io"
-        exclude module: "gson"
-        exclude module: "launchwrapper"
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    embed('org.spongepowered:mixin:0.8.3-SNAPSHOT') {
+        exclude module: 'guava'
+        exclude module: 'commons-io'
+        exclude module: 'gson'
     }
-    annotationProcessor "org.spongepowered:mixin:0.7.11-SNAPSHOT"
+
+    implementation fg.deobf("curse.maven:foamfix-optimization-mod-278494:3327893")
+    implementation fg.deobf("curse.maven:performant-354143:3511568")
+    implementation fg.deobf("curse.maven:surge-250290:2665849")
 }
-
-reobf {
-    shadowJar {
-        classpath = sourceSets.main.compileClasspath
-    }
-}
-
-mixin {
-    add sourceSets.main, "mixins.${modid}.refmap.json"
-}
-
-
-shadowJar {
-    archiveFileName = jar.archiveFileName
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    configurations = [project.configurations.include]
-}
-
-jar {
-    manifest.attributes(
-            "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
-            "MixinConfigs": "mixins.${modid}.json",
-            "FMLCorePluginContainsFMLMod": true,
-            "ForceLoadAsMod": true
-    )
-
-    enabled = false
-}
-
-tasks.reobfJar.dependsOn(tasks.shadowJar)
 
 processResources {
     inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+    inputs.property "mcversion", minecraft_version
 
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
 
-        expand 'version': project.version, 'mcversion': project.minecraft.version
+        expand 'mod_id': mod_id, 'mod_name': mod_name, 'version': project.version,
+                'mcversion': minecraft_version, 'mod_description': mod_description,
+                'mod_author': mod_author
     }
 
     from(sourceSets.main.resources.srcDirs) {
@@ -98,12 +85,25 @@ processResources {
     }
 }
 
-task moveResources {
-    doLast {
-        ant.move file: "${buildDir}/resources/main",
-                todir: "${buildDir}/classes/java"
+mixin {
+    add sourceSets.main, mod_mixin_refmap.replace('${mod_id}', mod_id)
+}
+
+jar {
+    from {
+        configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
+    } {
+        exclude "LICENSE.md", "META-INF/MANIFSET.MF", "META-INF/maven/**", "META-INF/*.RSA", "META-INF/*.SF"
+    }
+
+    manifest {
+        attributes "FMLCorePlugin": mod_core_plugin.replace('${mod_group}', mod_group).replace('${mod_id}', mod_id)
+        attributes "FMLCorePluginContainsFMLMod": "false"
+        attributes "ForceLoadAsMod": "true"
+        attributes "TweakClass": "org.spongepowered.asm.launch.MixinTweaker"
+        attributes "TweakOrder": "0"
+        attributes "MixinConfigs": mod_mixin_configs.replace('${mod_id}', mod_id)
     }
 }
 
-moveResources.dependsOn processResources
-classes.dependsOn moveResources
+jar.finalizedBy('reobfJar')

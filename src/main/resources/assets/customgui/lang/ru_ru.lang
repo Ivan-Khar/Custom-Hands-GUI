@@ -7,12 +7,16 @@ key.aqupd.configgui=Открыть конфигурацию
 config.aqupd.rotation=Поворот
 config.aqupd.position=Позиция
 
-config.aqupd.swaphands=Поменять главную руку
+config.aqupd.handedit=Редактируем
 config.aqupd.swapchat=Перемещать чат
 config.aqupd.autorefresh=Авто перезагрузка
-config.aqupd.resetposition=Сброс положения рук
+config.aqupd.resetposition=Сброс положения руки
 
+config.aqupd.handedit.desc=
 config.aqupd.swaphands.desc=Меняет главную руку
 config.aqupd.resetposition.desc=Устанавливает позицию и поворот на 0
 config.aqupd.swapchat.desc=Меняет позицию чата на правую сторону если ваша рука находится на левой стороне
 config.aqupd.autorefresh.desc=Обновляет конфигурацию из файла каждую секунду
+
+gui.left.hand=Левую руку
+gui.right.hand=Правую руку

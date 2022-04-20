@@ -7,12 +7,16 @@ key.aqupd.configgui=Open Config
 config.aqupd.rotation=Rotation
 config.aqupd.position=Position
 
-config.aqupd.swaphands=Swap Hands
+config.aqupd.handedit=Editing
 config.aqupd.swapchat=Swap Chat
 config.aqupd.autorefresh=Auto Refresh
 config.aqupd.resetposition=Reset Position
 
-config.aqupd.swaphands.desc=Swaps hands
-config.aqupd.resetposition.desc=Sets Positions and Rotations to 0
+config.aqupd.handedit.desc=Sets the hand that going to be affected by sliders.
+config.aqupd.swaphands.desc=Swaps main hand.
+config.aqupd.resetposition.desc=Sets Positions and Rotations to 0.
 config.aqupd.swapchat.desc=Changes chat position to the right side if your main hand is on the left side.
 config.aqupd.autorefresh.desc=Updates configuration file every 1 second.
+
+gui.left.hand=Left hand
+gui.right.hand=Right hand

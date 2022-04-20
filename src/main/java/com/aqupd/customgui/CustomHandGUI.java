@@ -17,14 +17,16 @@ import java.io.IOException;
 import static com.aqupd.customgui.util.Configuration.loadOptions;
 import static com.aqupd.customgui.util.Configuration.update;
 
-@Mod(modid = CustomHandGUI.MOD_ID, name = CustomHandGUI.MOD_NAME, version = CustomHandGUI.VERSION, clientSideOnly = true)
+@Mod(modid = CustomHandGUI.MOD_ID, clientSideOnly = true)
 public class CustomHandGUI {
 
 	public static final String MOD_ID = "customgui";
+
 	public static final String MOD_NAME = "Custom Hand Gui mod";
-	public static final String VERSION = "1.4";
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static String logprefix = "[AqUpd's " + MOD_NAME + "] ";
+
+	public static boolean isLeftHand;
 
 	public static long xguitimer = 0;
 	public static long yguitimer = 0;
