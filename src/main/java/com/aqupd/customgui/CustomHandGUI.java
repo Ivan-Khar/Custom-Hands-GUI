@@ -17,11 +17,11 @@ import java.io.IOException;
 import static com.aqupd.customgui.util.Configuration.loadOptions;
 import static com.aqupd.customgui.util.Configuration.update;
 
-@Mod(modid = CustomHandGUI.MOD_ID, clientSideOnly = true)
+@Mod(modid = CustomHandGUI.MOD_ID, version = CustomHandGUI.MOD_VERSION, clientSideOnly = true)
 public class CustomHandGUI {
 
 	public static final String MOD_ID = "customgui";
-
+	public static final String MOD_VERSION = "1.4";
 	public static final String MOD_NAME = "Custom Hand Gui mod";
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static String logprefix = "[AqUpd's " + MOD_NAME + "] ";

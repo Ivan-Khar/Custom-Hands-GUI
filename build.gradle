@@ -52,7 +52,12 @@ configurations {
     compile.extendsFrom(embed)
 }
 
-sourceSets {main { output.resourcesDir = output.classesDir }}
+sourceSets {
+    main {
+        output.resourcesDir = output.classesDir
+        refMap = "refmap.customgui.json"
+    }
+}
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
