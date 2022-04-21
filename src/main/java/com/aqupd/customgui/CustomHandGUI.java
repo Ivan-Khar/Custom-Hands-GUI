@@ -4,20 +4,15 @@ import com.aqupd.customgui.listeners.EventListener;
 import com.aqupd.customgui.setup.Registrations;
 import com.aqupd.customgui.util.Configuration;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
-import static com.aqupd.customgui.util.Configuration.loadOptions;
-import static com.aqupd.customgui.util.Configuration.update;
+import static com.aqupd.customgui.CustomHandGUI.MOD_ID;
 
-@Mod(modid = CustomHandGUI.MOD_ID, version = CustomHandGUI.MOD_VERSION, clientSideOnly = true)
+@Mod(MOD_ID)
 public class CustomHandGUI {
 
 	public static final String MOD_ID = "customgui";
@@ -36,27 +31,11 @@ public class CustomHandGUI {
 	public static long yrottimer = 0;
 	public static long zrottimer = 0;
 
-	private int i = 0;
-	private final EventListener eventListener;
 
 	public CustomHandGUI() throws IOException {
 		Registrations.init();
-		this.eventListener = new EventListener();
 		Configuration.loadOptions();
-		FMLCommonHandler.instance().bus().register(this);
-	}
-
-	@SubscribeEvent
-	public void onPlayerTick(TickEvent.PlayerTickEvent event) throws IOException {
-		if (i == 80) {
-			if (update) loadOptions();
-			i = 0;
-		}
-		i++;
-	}
-
-	@Mod.EventHandler
-	public void onFMLInitializationEvent(FMLInitializationEvent ev) {
-		MinecraftForge.EVENT_BUS.register(eventListener);
+		MinecraftForge.EVENT_BUS.register(this);
+		MinecraftForge.EVENT_BUS.register(new EventListener());
 	}
 }
