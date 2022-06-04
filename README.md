@@ -25,3 +25,8 @@ And you can change your main hand to be left hand!
 # Mod showcase:
 [![Video](https://img.youtube.com/vi/MHhldftIvxU/0.jpg)](https://www.youtube.com/watch?v=MHhldftIvxU)
 
+# things for me:
+Need to put this thing into CLI arguments of Minecraft Client configuration
+```
+--tweakClass org.spongepowered.asm.launch.MixinTweaker --mixin mixins.customgui.json
+```
